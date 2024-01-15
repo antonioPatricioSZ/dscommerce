@@ -22,6 +22,8 @@ public class User {
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
+    // não pode fazer set de lista
+
     public User() {}
 
     public User(

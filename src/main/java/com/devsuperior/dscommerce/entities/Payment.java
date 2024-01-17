@@ -3,6 +3,7 @@ package com.devsuperior.dscommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 
 @Entity
@@ -21,6 +22,22 @@ public class Payment {
 
     // aqui o id do order vai ser o id do payment,
     // pois o id de order vai ter que ser igual ao id de payment
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Payment payment = (Payment) o;
+
+        return Objects.equals(id, payment.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 
     public Payment(Long id, Instant moment, Order order) {
         this.id = id;

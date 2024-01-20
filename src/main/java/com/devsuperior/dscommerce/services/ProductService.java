@@ -63,6 +63,9 @@ public class ProductService {
         }
     }
 
+    // Só vai executar essa transação se este método estiver no contexto de
+    // outra transação, se não tiver ele não executa esse transactional, e vai
+    // capturar de forma certa a exception
     @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         if(!repository.existsById(id)) {

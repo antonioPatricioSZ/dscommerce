@@ -31,12 +31,12 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<CustomError> database(
-            DatabaseException e,
-            HttpServletRequest request
+        DatabaseException e,
+        HttpServletRequest request
     ){
         var status = HttpStatus.BAD_REQUEST;
         var err = new CustomError(
-                Instant.now(), status.value(), e.getMessage(), request.getRequestURI()
+            Instant.now(), status.value(), e.getMessage(), request.getRequestURI()
         );
         return ResponseEntity.status(status).body(err);
     }
@@ -44,8 +44,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<CustomError> methodArgumentNotValidation(
-            MethodArgumentNotValidException e,
-            HttpServletRequest request
+        MethodArgumentNotValidException e,
+        HttpServletRequest request
     ){
         var status = HttpStatus.UNPROCESSABLE_ENTITY;
         var err = new ValidationError(
@@ -58,3 +58,15 @@ public class ControllerExceptionHandler {
     }
 
 }
+
+/*
+    A expressão e.getBindingResult().getFieldErrors() retorna uma
+    lista de objetos FieldError. A cada iteração do loop, um desses
+    objetos é atribuído à variável f. O loop percorre a lista, e em cada
+    iteração, f representa um objeto FieldError diferente da lista.
+
+    Portanto, sim, cada item do retorno da lista e.getBindingResult().getFieldErrors()
+    é atribuído a f durante cada passagem do loop. Você pode, então, acessar as
+    propriedades e métodos do objeto FieldError através da variável f dentro do
+    bloco do loop.
+*/
